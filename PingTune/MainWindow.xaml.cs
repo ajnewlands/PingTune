@@ -188,27 +188,35 @@ namespace PingTune
         }
 
         public MainWindow()
-        {            
-            _adaptors = PingTune.NetState.getAdapterState();
-            _sys_state = new PingTune.GlobalSystemState();
+        {
+            try
+            {
+                _adaptors = PingTune.NetState.getAdapterState();
+                _sys_state = new PingTune.GlobalSystemState();
 
-            string systemLanguage = System.Globalization.CultureInfo.CurrentCulture.ThreeLetterISOLanguageName.ToString();
-            _tt = getToolTipsForLanguage(systemLanguage);
+                string systemLanguage = System.Globalization.CultureInfo.CurrentCulture.ThreeLetterISOLanguageName.ToString();
+                _tt = getToolTipsForLanguage(systemLanguage);
 
-            EventManager.RegisterClassHandler(typeof(FrameworkElement), FrameworkElement.ToolTipOpeningEvent, new ToolTipEventHandler(getToolTip));
+                EventManager.RegisterClassHandler(typeof(FrameworkElement), FrameworkElement.ToolTipOpeningEvent, new ToolTipEventHandler(getToolTip));
 
-            InitializeComponent();
-            DataContext = this;
-            AdapterListBox.ItemsSource = GetAdapterList();
-            AdapterListBox.DisplayMemberPath = "Value";
-            AdapterListBox.SelectedValuePath = "Key";
-            AdapterListBox.SelectedIndex = 0;
-            _selectedAdaptor = _adaptors[AdapterListBox.SelectedValue.ToString()];
+                InitializeComponent();
+                DataContext = this;
+                AdapterListBox.ItemsSource = GetAdapterList();
+                AdapterListBox.DisplayMemberPath = "Value";
+                AdapterListBox.SelectedValuePath = "Key";
+                AdapterListBox.SelectedIndex = 0;
+                _selectedAdaptor = _adaptors[AdapterListBox.SelectedValue.ToString()];
 
-            MtuOptValueBox.Text = optMtu.ToString();
+                MtuOptValueBox.Text = optMtu.ToString();
 
-            toggleThrottling.IsChecked = _sys_state.netThrottling.isOptimized();
-            toggleMaxForePriority.IsChecked = _sys_state.backgroundReservedCpuPct.isOptimized();
+                toggleThrottling.IsChecked = _sys_state.netThrottling.isOptimized();
+                toggleMaxForePriority.IsChecked = _sys_state.backgroundReservedCpuPct.isOptimized();
+            }
+            catch (System.IO.FileNotFoundException e)
+            {
+                MessageBox.Show("Could not find " + e.FileName);
+                this.Close();
+            }
         }
     }
 }

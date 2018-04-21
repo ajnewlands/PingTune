@@ -26,7 +26,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="AdapterListBox" SelectionChanged="onSelectAdapter" ToolTip="getToolTip" HorizontalAlignment="Left" Height="25" Margin="16,160,0,0" VerticalAlignment="Top" Width="359" Grid.ColumnSpan="2" Opacity="0"/>
+        <ComboBox x:Name="AdapterListBox" SelectionChanged="onSelectAdapter" ToolTip="getToolTip" HorizontalAlignment="Left" Height="25" Margin="16,160,0,0" VerticalAlignment="Top" Width="359" Grid.ColumnSpan="2"/>
         <Label x:Name="FlowControl" Content="Disable Flow Control" HorizontalAlignment="Left" Margin="30,200,0,294" Width="133" FontWeight="Bold" Grid.ColumnSpan="2"/>
         <Label x:Name="labelInterruptModeration" Content="Disable Interrupt Moderation" HorizontalAlignment="Left" Margin="127,200,0,292" Width="178" FontWeight="Bold" Grid.Column="1"/>
         <Label x:Name="LabelMtu" Content="Max Transmission Unit (MTU)" HorizontalAlignment="Left" Margin="30,473,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="179" RenderTransformOrigin="2.793,-3.269" Height="26" Grid.Column="1"/>

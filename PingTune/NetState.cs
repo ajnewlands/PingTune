@@ -45,7 +45,6 @@ namespace PingTune
                     _ethernetAdapters.Add( adapter.Id, a );
                 }
             }
-            Console.WriteLine("Found {0} ethernet devices", _ethernetAdapters.Count());
 
             getRegNdisValues();
 
@@ -67,44 +66,52 @@ namespace PingTune
                     {
                         RegistryKey ndis_reg = Registry.LocalMachine.OpenSubKey("SYSTEM\\ControlSet001\\Control\\Class\\{4d36e972-e325-11ce-bfc1-08002be10318}" + "\\" + keyName, false);
                         string Id = ndis_reg.GetValue("NetCfgInstanceId", "").ToString();
+
                         if (Id != "")
                         { // Just in case we somehow open one of the non-NDIS keys despite the permissions on them.
                             if (_ethernetAdapters.ContainsKey(Id)) // Ensure we only examine the "interesting" ethernet adapters.
                             {
                                 _ethernetAdapters[Id]._ndis_key = keyName;
-                               
-                                _ethernetAdapters[Id].FlowControl = new Tunable(ndis_reg.GetValue("*FlowControl", "3"), "3", "0", RegistryValueKind.String);
-                                // Interrupt moderation current state and default value (well known values)
-                                _ethernetAdapters[Id].InterruptModeration = new Tunable(ndis_reg.GetValue("*InterruptModeration", "1"), "1", "0", RegistryValueKind.String);
-                                // Number of receive buffers - keys standard, values not. 
-                                RegistryKey rx_buf_dflts = ndis_reg.OpenSubKey("Ndi\\Params\\*ReceiveBuffers", false);
-                                _ethernetAdapters[Id].RxBuffers = new Tunable(ndis_reg.GetValue("*ReceiveBuffers", "256"),
-                                    rx_buf_dflts.GetValue("default", "256"),
-                                    rx_buf_dflts.GetValue("max", "256"),
-                                    RegistryValueKind.String);
-                                rx_buf_dflts.Close();
 
-                                //Transmit buffers - keys are standard, values are not. 
-                                RegistryKey tx_buf_dflts = ndis_reg.OpenSubKey("Ndi\\Params\\*TransmitBuffers", false);
-                                _ethernetAdapters[Id].TxBuffers = new Tunable(ndis_reg.GetValue("*TransmitBuffers", "256"),
-                                    tx_buf_dflts.GetValue("default", "256"),
-                                    tx_buf_dflts.GetValue("max", "256"),
-                                    RegistryValueKind.String);
-                                tx_buf_dflts.Close();
+                                try
+                                {
+                                    _ethernetAdapters[Id].FlowControl = new Tunable(ndis_reg.GetValue("*FlowControl", "3"), "3", "0", RegistryValueKind.String);
+                                    // Interrupt moderation current state and default value (well known values)
+                                    _ethernetAdapters[Id].InterruptModeration = new Tunable(ndis_reg.GetValue("*InterruptModeration", "1"), "1", "0", RegistryValueKind.String);
+                                    // Number of receive buffers - keys standard, values not. 
+                                    RegistryKey rx_buf_dflts = ndis_reg.OpenSubKey("Ndi\\Params\\*ReceiveBuffers", false);
+                                    _ethernetAdapters[Id].RxBuffers = new Tunable(ndis_reg.GetValue("*ReceiveBuffers", "256"),
+                                        rx_buf_dflts.GetValue("default", "256"),
+                                        rx_buf_dflts.GetValue("max", "256"),
+                                        RegistryValueKind.String);
+                                    rx_buf_dflts.Close();
 
-                                // Large send offload - well known keys and known to cause trouble when enabled.
-                                _ethernetAdapters[Id].LargeSendOffload = new Tunable(ndis_reg.GetValue("*LsoV2IPv4", "1"), "1", "0", RegistryValueKind.String);
+                                    //Transmit buffers - keys are standard, values are not. 
+                                    RegistryKey tx_buf_dflts = ndis_reg.OpenSubKey("Ndi\\Params\\*TransmitBuffers", false);
+                                    _ethernetAdapters[Id].TxBuffers = new Tunable(ndis_reg.GetValue("*TransmitBuffers", "256"),
+                                        tx_buf_dflts.GetValue("default", "256"),
+                                        tx_buf_dflts.GetValue("max", "256"),
+                                        RegistryValueKind.String);
+                                    tx_buf_dflts.Close();
 
-                                // Offload settings for TCP and UDP (well known values)
-                                _ethernetAdapters[Id].TcpChecksumOffload = new Tunable(ndis_reg.GetValue("*TCPChecksumOffloadIPv4", "3"), "3", "0", RegistryValueKind.String);
-                                _ethernetAdapters[Id].UdpChecksumOffload = new Tunable(ndis_reg.GetValue("*UDPChecksumOffloadIPv4", "3"), "3", "0", RegistryValueKind.String);
+                                    // Large send offload - well known keys and known to cause trouble when enabled.
+                                    _ethernetAdapters[Id].LargeSendOffload = new Tunable(ndis_reg.GetValue("*LsoV2IPv4", "1"), "1", "0", RegistryValueKind.String);
 
-                                // Receive side scaling (well known keys and values)
-                                _ethernetAdapters[Id].RSS = new Tunable(ndis_reg.GetValue("*RSS", "1"), "1", "0", RegistryValueKind.String);
+                                    // Offload settings for TCP and UDP (well known values)
+                                    _ethernetAdapters[Id].TcpChecksumOffload = new Tunable(ndis_reg.GetValue("*TCPChecksumOffloadIPv4", "3"), "3", "0", RegistryValueKind.String);
+                                    _ethernetAdapters[Id].UdpChecksumOffload = new Tunable(ndis_reg.GetValue("*UDPChecksumOffloadIPv4", "3"), "3", "0", RegistryValueKind.String);
 
-                                // Header data split - allows packets to be split into payload and header for concurrent processing.
-                                // Assuming this is good until show otherwise, however implicitly disabled anyway if header checksum offload is disabled.
-                                _ethernetAdapters[Id].HeaderDataSplit = new Tunable(ndis_reg.GetValue("*HeaderDataSplit", "0"), "0", "1", RegistryValueKind.String);
+                                    // Receive side scaling (well known keys and values)
+                                    _ethernetAdapters[Id].RSS = new Tunable(ndis_reg.GetValue("*RSS", "1"), "1", "0", RegistryValueKind.String);
+
+                                    // Header data split - allows packets to be split into payload and header for concurrent processing.
+                                    // Assuming this is good until show otherwise, however implicitly disabled anyway if header checksum offload is disabled.
+                                    _ethernetAdapters[Id].HeaderDataSplit = new Tunable(ndis_reg.GetValue("*HeaderDataSplit", "0"), "0", "1", RegistryValueKind.String);
+                                }
+                                catch (NullReferenceException)
+                                { // Generally due to odd devices (e.g. IRDA) reported as being ethernet devices.
+                                    _ethernetAdapters.Remove(Id); // Get the oddball out of our list.
+                                }
                             }
                             
                         }
