@@ -59,8 +59,6 @@ namespace PingTune
         {
             switch (lang)
             {
-                case "unittest": // stub language for unit testing.
-                    return new ToolTipLibraryEnglish();
                 default: // process ISO3 codes for real languages.
                     return new ToolTipLibraryEnglish();
             }

@@ -22,7 +22,6 @@ namespace PingTune
             var o = new PingOptions();
             o.DontFragment = true;
 
-
             for (int i = 1500; i > 0; i--)
             {
                 byte[] buf = new byte[i];
@@ -39,8 +38,7 @@ namespace PingTune
                 {
                     // Something unexpected has broken down - return default.
                     break;
-                }
-                
+                }                
             }
             return 1500; // The limit for Ethernet.
         }
