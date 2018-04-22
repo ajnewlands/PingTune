@@ -193,4 +193,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)\packages\LibZ.Tool.1.2.0.0\tools\libz.exe inject-dll --assembly $(TargetDir)\PingTune.exe --include $(TargetDir)\*.dll --move
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

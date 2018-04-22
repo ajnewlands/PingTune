@@ -85,14 +85,14 @@ namespace PingTune
 
                     foreach (var a in _adaptors.Values)
                         a.Commit();
-                    MessageBox.Show("Done writing changes to the registry.\nThese will take effect after the next reboot.");
+                    MessageBox.Show("Done writing changes to the registry.\nThese will take effect after the next reboot.", "Saved successfully");
                     this.Close();
                     break;
                 case "buttonCancelQuit":
                     this.Close();
                     break; // vaguely superfluous!
                 default:
-                    MessageBox.Show(msg);
+                    MessageBox.Show(msg,"Warning");
                     break;
             }
             return;
@@ -164,7 +164,7 @@ namespace PingTune
                     t = (event_type == "Checked") ? s.LargeSendOffload.setOptimized() : s.LargeSendOffload.setDefault();
                     break;
                 default:
-                    MessageBox.Show(msg);
+                    MessageBox.Show(msg, "Warning");
                     break;
             }
         }
@@ -214,7 +214,7 @@ namespace PingTune
             }
             catch (System.IO.FileNotFoundException e)
             {
-                MessageBox.Show("Could not find " + e.FileName);
+                MessageBox.Show("Could not find " + e.FileName ,"Error");
                 this.Close();
             }
         }
