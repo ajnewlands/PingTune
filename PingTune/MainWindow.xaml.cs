@@ -66,7 +66,7 @@ namespace PingTune
 
         private void genericButtonPress( object sender, RoutedEventArgs e)
         {
-            var origin_name = ((Button)sender).Name;
+            var origin_name = ((FrameworkElement)sender).Name;
             var event_type = e.RoutedEvent.Name;
             string msg = "unhandled event: " + event_type + " origin: " + origin_name;
             var s = _selectedAdaptor; // for sake of brevity.
@@ -99,15 +99,19 @@ namespace PingTune
         // fuck XAML anyway :-)
         void getToolTip( object sender, RoutedEventArgs e)
         {
+   
             var origin_name = ((FrameworkElement)sender).Name;
-            ((FrameworkElement)sender).ToolTip = _tt.getToolTip( origin_name );
+            var tt = new ToolTip();
+            tt.Content = _tt.getToolTip( origin_name );
+            ((FrameworkElement)sender).ToolTip = tt;
 
         }
 
         private void genericToggle( object sender, RoutedEventArgs e)
         {
             var event_type = e.RoutedEvent.Name;
-            var origin_name = ((ToggleSwitch)sender).Name;
+            var origin_name = ((FrameworkElement)sender).Name;
+
             string msg = "unhandled event: " + event_type + " origin: " + origin_name;
 
             // two aliases for the sake of brevity below
