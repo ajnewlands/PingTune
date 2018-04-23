@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="PingTuneSetup" Language="1033" Version="1.0.0.0" Manufacturer="AJN" UpgradeCode="c51730c7-b8fd-480b-873c-43755b124c15">
+	<Product Id="*" Name="PingTuneSetup" Language="1033" Version="1.2.0.0" Manufacturer="AJN" UpgradeCode="c51730c7-b8fd-480b-873c-43755b124c15">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes"/>
