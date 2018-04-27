@@ -1,7 +1,7 @@
 # PingTune
 A simple interface to tune Windows 10 settings impacting latency, particularly relevant to online gaming or trading applications where milliseconds matter.
 
-![Optimize-O-Matic demo](https://github.com/ajnewlands/PingTune/blob/master/Optimize-O-Matic.gif?raw=true)
+![Optimize-O-Matic demo](https://github.com/ajnewlands/PingTune/raw/master/Optimize-O-Matic.gif)
 
 Provides predefined optimization profiles for low latency, general desktop and network server workloads.
 
