@@ -7,9 +7,11 @@ Provides predefined optimization profiles for low latency, general desktop and n
 
 # Where to get it
 
-[Latest Release](https://github.com/ajnewlands/PingTune/releases/latest>)
+[Latest Release](https://github.com/ajnewlands/PingTune/releases/latest)
 
-
+<!-- {% raw %} -->
+https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip
+<!-- {% endraw %}) -->
 
 # What it does
 
