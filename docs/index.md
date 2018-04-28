@@ -5,6 +5,9 @@ A simple interface to tune Windows 10 settings impacting latency, particularly r
 
 Provides predefined optimization profiles for low latency, general desktop and network server workloads.
 
+# Where to get it
+![PingTune-1.5.zip](https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip)
+
 Individual parameters are fully tweakable through the graphical interface as well, including:
 - Adjusting the built in Windows network packet throttle.
 - Changing the balance between foreground and background application responsiveness
