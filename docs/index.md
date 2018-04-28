@@ -6,7 +6,11 @@ A simple interface to tune Windows 10 settings impacting latency, particularly r
 Provides predefined optimization profiles for low latency, general desktop and network server workloads.
 
 # Where to get it
+<!-- {% raw %} -->
+```html
 <a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip>PingTune-1.5.zip</a>
+```
+<!-- {% endraw %}) -->
 
 # What it does
 
