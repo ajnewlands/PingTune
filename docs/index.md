@@ -10,7 +10,7 @@ Provides predefined optimization profiles for low latency, general desktop and n
 [Latest Release](https://github.com/ajnewlands/PingTune/releases/latest)
 
 <!-- {% raw %} -->
-<a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip>PingTune-1.5.zip</a>
+\<a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip\>PingTune-1.5.zip\</a\>
 <!-- {% endraw %}) -->
 
 # What it does
@@ -22,3 +22,5 @@ Individual parameters are fully tweakable through the graphical interface as wel
 - Enable or disable sharing windows updates via peer-to-peer networking
 - Disable the digital video recording mechanism built into the XBox app
 - Tweak numerous low level networking parameters such as Nagle's algorithm ("Nagling"), ACK delays and frequency, NIC interrupt moderation and buffer sizes. 
+
+[Detailed list of tweakables](what.md)
