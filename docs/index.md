@@ -7,7 +7,9 @@ Provides predefined optimization profiles for low latency, general desktop and n
 
 # Where to get it
 
-`<a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip>`PingTune-1.5.zip`</a>`
+<a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip>
+PingTune-1.5.zip
+</a>
 
 
 # What it does
