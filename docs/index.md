@@ -9,10 +9,6 @@ Provides predefined optimization profiles for low latency, general desktop and n
 
 [Latest Release](https://github.com/ajnewlands/PingTune/releases/latest)
 
-<!-- {% raw %} -->
-[a href=https://github.com/ajnewlands/PingTune/files/1945279/PingTune-1.5.zip]PingTune-1.5.zip[/a]
-<!-- {% endraw %}) -->
-
 # What it does
 
 Individual parameters are fully tweakable through the graphical interface as well, including:
